@@ -1,9 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    >
 
-</android.support.constraint.ConstraintLayout>
+
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp"
+        android:background="@null"
+        android:gravity="center"
+        android:src="@drawable/iconfinder_magnifier_and_car_1421622" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="이메일"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/EditText_email">
+
+    </EditText>
+
+
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/EditText_password"
+        android:inputType="textPassword">
+
+    </EditText>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:background="@color/colorPink"
+        android:id="@+id/login_button"
+    />
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        >
+    </TextView>
+
+
+   <Button
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="페이스북으로 로그인"
+       android:background="@color/colorFacebook"
+       android:layout_marginBottom="20dp"
+       android:id="@+id/facebook_button"
+       />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="혹시 회원이 아니신가요?"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="간편 회원가입"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        android:id="@+id/sign_up_login"
+        />
+
+
+</LinearLayout>
