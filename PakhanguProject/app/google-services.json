@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "765947468728",
-    "firebase_url": "https://pakhanguproject.firebaseio.com",
-    "project_id": "pakhanguproject",
-    "storage_bucket": "pakhanguproject.appspot.com"
+    "project_number": "175259619837",
+    "firebase_url": "https://khac-bcee2.firebaseio.com",
+    "project_id": "khac-bcee2",
+    "storage_bucket": "khac-bcee2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:765947468728:android:d91f8919c0775e98",
+        "mobilesdk_app_id": "1:175259619837:android:0c4d8c68340e98ca",
         "android_client_info": {
-          "package_name": "com.example.pcs94.pakhanguproject"
+          "package_name": "com.example.google"
         }
       },
       "oauth_client": [
         {
-          "client_id": "765947468728-8i4dhv6a9h533s7g6cnpalf9ou5gmkqq.apps.googleusercontent.com",
+          "client_id": "175259619837-52a1jmq3ajagpb5svig32mrhlq8arnfj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.pcs94.pakhanguproject",
-            "certificate_hash": "2f3f66c7a182c0ea2f21bd7b8ddfc0f4173450ca"
+            "package_name": "com.example.google",
+            "certificate_hash": "43801bda8e96d6ccb2268fff1956f9b563344335"
           }
         },
         {
-          "client_id": "765947468728-lj6gerhpsaqpudnr64023jvekg9jemug.apps.googleusercontent.com",
+          "client_id": "175259619837-uoukh62r5r3nmdb09aco5cms6nlje1bc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCGt-mFmbmpEdY24RGURHAVQTD7xZEXPdw"
+          "current_key": "AIzaSyB_YU-dmyIaYrBkrwzDD4IlhXbd0ZIKk8s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "765947468728-lj6gerhpsaqpudnr64023jvekg9jemug.apps.googleusercontent.com",
+              "client_id": "175259619837-09018ftjmrmq7jtbbe877ervkdf396cm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

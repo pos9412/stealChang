@@ -1,8 +1,7 @@
-package com.example.myapplication;
+package com.example.google;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,7 +17,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private static final String TAG = "SignUpActivity";       // ÅÂ±×Ãß°¡
     private FirebaseAuth mAuth;
 
     @Override
@@ -26,10 +24,10 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        // Initialize Firebase Auth             // ÆÄÀÌ¾îº£ÀÌ½º º¹ºÙ, ÃÊ±âÈ­
+        // Initialize Firebase Auth             // íŒŒì´ì–´ë² ì´ìŠ¤ ë³µë¶™, ì´ˆê¸°í™”
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.sign_up_button).setOnClickListener(onClickListener);  // Å¬¸¯
+        findViewById(R.id.sign_up_button).setOnClickListener(onClickListener);  // í´ë¦­
     }
 
 
@@ -37,35 +35,34 @@ public class SignupActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.sign_up_button :   // ¹öÆ°´­·¶À»¶§ ·ÎÁ÷
+                case R.id.sign_up_button :   // ë²„íŠ¼ëˆŒë €ì„ë•Œ ë¡œì§
                     signUp();
                  break;
             }
         }
     };
 
-    private void signUp() {    // È¸¿ø°¡ÀÔ ±â´É
+    private void signUp() {    // íšŒì›ê°€ì… ê¸°ëŠ¥
 
-        String email = ((EditText)findViewById(R.id.emailEditText)).getText().toString();   // email,password °ª Ã£±â
+        String email = ((EditText)findViewById(R.id.emailEditText)).getText().toString();   // email,password ê°’ ì°¾ê¸°
         String password = ((EditText)findViewById(R.id.passwordEditText)).getText().toString();
         String passwordCheck = ((EditText)findViewById(R.id.passwordCheckEditText)).getText().toString();
 
-
-        if(email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {  // ÀÔ·ÂÀÌ µÇ¾îÀÖ¾î¾ß ½ÇÇà
+        if(email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {  // ì…ë ¥ì´ ë˜ì–´ìˆì–´ì•¼ ì‹¤í–‰
             if (password.equals(passwordCheck)) {
-                mAuth.createUserWithEmailAndPassword(email, password)         // ÆÄÀÌ¾îº£ÀÌ½º º¹ºÙ
+                mAuth.createUserWithEmailAndPassword(email, password)         // íŒŒì´ì–´ë² ì´ìŠ¤ ë³µë¶™
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    startToast("È¸¿ø°¡ÀÔÀÌ ¿Ï·á µÇ¾ú½À´Ï´Ù.");
+                                    startToast("íšŒì›ê°€ì…ì´ ì™„ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤.");
                                     startLoginActivity();
-                                    //¼º°ø UI ·ÎÁ÷
+                                    //ì„±ê³µ UI ë¡œì§
                                 } else {
-                                    //½ÇÆĞ UI ·ÎÁ÷
+                                    //ì‹¤íŒ¨ UI ë¡œì§
                                     if (task.getException() != null) {
-                                        startToast("ÀÌ¸ŞÀÏ Çü½ÄÀÌ Æ²·È½À´Ï´Ù.");
+                                        startToast("ì´ë©”ì¼ í˜•ì‹ì´ í‹€ë ¸ìŠµë‹ˆë‹¤.");
                                         //startToast(task.getException().toString());
                                     }
                                 }
@@ -75,17 +72,17 @@ public class SignupActivity extends AppCompatActivity {
             }
             else
             {
-                startToast("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+                startToast("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             }
         }
         else
         {
-            startToast("ÀÌ¸ŞÀÏ ¶Ç´Â ºñ¹Ğ¹øÈ£¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä.");
+            startToast("ì´ë©”ì¼ ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥ í•´ì£¼ì„¸ìš”.");
         }
 
     }
 
-    private void startToast(String msg)    // Åä½ºÆ® »ı¼ºÇÔ¼ö
+    private void startToast(String msg)    // í† ìŠ¤íŠ¸ ìƒì„±í•¨ìˆ˜
     {
         Toast.makeText(this, msg,
                 Toast.LENGTH_SHORT).show();
@@ -93,9 +90,9 @@ public class SignupActivity extends AppCompatActivity {
 
     private void startLoginActivity()
     {
-        Intent intent = new Intent(this,LoginActivity.class);  // ·¹ÀÌ¾Æ¿ô ³Ñ±â±â
-        intent .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  // ¾×Æ¼ºñÆ¼ ³Ñ±â°í ´Ù½Ã¸øµ¹¾Æ°¡°ÔÇÔ
-        FirebaseAuth.getInstance().signOut();    // ·Î±×¾Æ¿ô ±â´É, Áö¿ï½Ã È¸¿ø°¡ÀÔÈÄ ¾îÇÃÁ¾·áÇØµµ ´Ù½ÃÅ°¸é ·Î±×ÀÎµÊ
+        Intent intent = new Intent(this,LoginActivity.class);  // ë ˆì´ì•„ì›ƒ ë„˜ê¸°ê¸°
+        intent .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  // ì•¡í‹°ë¹„í‹° ë„˜ê¸°ê³  ë‹¤ì‹œëª»ëŒì•„ê°€ê²Œí•¨
+        FirebaseAuth.getInstance().signOut();    // ë¡œê·¸ì•„ì›ƒ ê¸°ëŠ¥, ì§€ìš¸ì‹œ íšŒì›ê°€ì…í›„ ì–´í”Œì¢…ë£Œí•´ë„ ë‹¤ì‹œí‚¤ë©´ ë¡œê·¸ì¸ë¨
         startActivity(intent);
     }
 }

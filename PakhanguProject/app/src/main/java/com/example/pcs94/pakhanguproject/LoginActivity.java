@@ -1,47 +1,70 @@
-package com.example.myapplication;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+package com.example.google;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
-public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "SignUpActivity";       // ÅÂ±×Ãß°¡
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
     private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Auth             // ÆÄÀÌ¾îº£ÀÌ½º º¹ºÙ, ÃÊ±âÈ­
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        findViewById(R.id.Google_Button).setOnClickListener(onClickListener); // í´ë¦­ì‹œ id ë°›ì•„ì˜´
+        findViewById(R.id.login_button).setOnClickListener(onClickListener);
+        findViewById(R.id.sign_up_login).setOnClickListener(onClickListener);
+
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.login_button).setOnClickListener(onClickListener);  // Å¬¸¯
-        findViewById(R.id.sign_up_login).setOnClickListener(onClickListener);  // Å¬¸¯
     }
 
-    @Override            // ÆÄÀÌ¾îº£ÀÌ½º º¹ºÙ
+    @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
+
     }
 
     @Override
-    public void onBackPressed()      // µÚ·Î°¡±â¹öÆ° ¾îÇÃÁ¾·á, ·Î±×¾Æ¿ôÀº ¾ÈµÊ !
+    public void onBackPressed()      // ë’¤ë¡œê°€ê¸°ë²„íŠ¼ ì–´í”Œì¢…ë£Œ, ë¡œê·¸ì•„ì›ƒì€ ì•ˆë¨ !
     {
         super.onBackPressed();
         moveTaskToBack(true);
@@ -50,39 +73,42 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
+    View.OnClickListener onClickListener = new View.OnClickListener() { // ë²„íŠ¼ì— ë”°ë¥¸ ë¡œì§
         @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.login_button :   // ¹öÆ°´­·¶À»¶§ ·ÎÁ÷
-                    signUp();
-                 break;
-                case R.id.sign_up_login :   // ¹öÆ°´­·¶À»¶§ ·ÎÁ÷
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.Google_Button:
+                    G_signIn();
+                    break;
+                case R.id.login_button :
+                    signIn();
+                    break;
+                case R.id.sign_up_login :
                     startSignupActivity();
                     break;
             }
         }
     };
 
-    private void signUp() {
 
-        String email = ((EditText)findViewById(R.id.EditText_email)).getText().toString();   // email,password °ª Ã£±â
+    private void signIn() {           // ì¼ë°˜ íšŒì› ë¡œê·¸ì¸
+
+        String email = ((EditText)findViewById(R.id.EditText_email)).getText().toString();   // email,password ê°’ ì°¾ê¸°
         String password = ((EditText)findViewById(R.id.EditText_password)).getText().toString();
 
 
-        if(email.length() > 0 && password.length() > 0) {  // ±âÁ¸ À¯Àú ·Î±×ÀÎ
+        if(email.length() > 0 && password.length() > 0) {  // ê¸°ì¡´ ìœ ì € ë¡œê·¸ì¸
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                startToast("·Î±×ÀÎ¿¡ ¼º°ø ÇÏ¿´½À´Ï´Ù.");
-                                startMainActivity();     // ·Î±×ÀÎ¼º°øÇÏ¸é ·¹ÀÌ¾Æ¿ô ³Ñ¾î°¨
+                                startToast("ë¡œê·¸ì¸ì— ì„±ê³µ í•˜ì˜€ìŠµë‹ˆë‹¤.");
+                                startMainActivity();     // ë¡œê·¸ì¸ì„±ê³µí•˜ë©´ ë ˆì´ì•„ì›ƒ ë„˜ì–´ê°
                             } else {
                                 if (task.getException() != null) {
-                                    startToast("ÀÌ¸ŞÀÏ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ Æ²·È½À´Ï´Ù.");
-                                   // startToast(task.getException().toString());
+                                    startToast("ì´ë©”ì¼ ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë ¸ìŠµë‹ˆë‹¤.");
                                 }
                             }
                         }
@@ -90,22 +116,67 @@ public class LoginActivity extends AppCompatActivity {
         }
         else
         {
-            startToast("ÀÌ¸ŞÀÏ ¶Ç´Â ºñ¹Ğ¹øÈ£¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä.");
+            startToast("ì´ë©”ì¼ ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥ í•´ì£¼ì„¸ìš”.");
         }
 
     }
 
-    private void startToast(String msg)    // Åä½ºÆ® »ı¼ºÇÔ¼ö
+    private void startToast(String msg)    // í† ìŠ¤íŠ¸ ìƒì„±í•¨ìˆ˜
     {
         Toast.makeText(this, msg,
                 Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    private void G_signIn() {    // êµ¬ê¸€ ë¡œê·¸ì¸ ì°½
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override               // êµ¬ê¸€ ê³„ì • íŒŒì´ì–´ë² ì´ìŠ¤ë¡œ !
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                startToast("êµ¬ê¸€ ì¸ì¦ ì‹¤íŒ¨");
+
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {   // êµ¬ê¸€ë¡œ ë¡œê·¸ì¸
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            startToast("ë¡œê·¸ì¸ì— ì„±ê³µ í•˜ì˜€ìŠµë‹ˆë‹¤.");
+                            startMainActivity();     // ë¡œê·¸ì¸ì„±ê³µí•˜ë©´ ë ˆì´ì•„ì›ƒ ë„˜ì–´ê°
+
+                        } else {
+                            startToast("ë¡œê·¸ì¸ ì‹¤íŒ¨");
+                        }
+
+                    }
+                });
+    }
 
     private void startMainActivity()
     {
         Intent intent = new Intent(this,MainActivity.class);
-        intent .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  // ´Ù½Ã¸øµ¹¾Æ°¡°ÔÇÔ
+        intent .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  // ë‹¤ì‹œëª»ëŒì•„ê°€ê²Œí•¨
         startActivity(intent);
     }
 
@@ -114,4 +185,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this,SignupActivity.class);
         startActivity(intent);
     }
+
+
 }

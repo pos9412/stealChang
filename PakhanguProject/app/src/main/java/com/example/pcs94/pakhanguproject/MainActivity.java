@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.google;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,11 +17,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {  // ·Î±×ÀÎ À¯Áö °ü·Ã ±â´É
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {  // ë¡œê·¸ì¸ ìœ ì§€ ê´€ë ¨ ê¸°ëŠ¥
             startLoginActivity();
         }
-                                                                                         //  ¹öÆ° ´©¸£±â
-        findViewById(R.id.logout_Button).setOnClickListener(onClickListener);      // ¹Ù·Î¹Ø ¹®¹ı°ú ¼¼Æ®
+        //  ë²„íŠ¼ ëˆ„ë¥´ê¸°
+        findViewById(R.id.logout_Button).setOnClickListener(onClickListener);      // ë°”ë¡œë°‘ ë¬¸ë²•ê³¼ ì„¸íŠ¸
     }
 
 
@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.logout_Button:         // ·Î±×¾Æ¿ô ¹öÆ°´©¸¦½Ã »çÀÎ¾÷¾×Æ¼ºñÆ¼·Î
-                    FirebaseAuth.getInstance().signOut();    // ·Î±×¾Æ¿ô ±â´É
-                    startToast("·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.");
+                case R.id.logout_Button:         // ë¡œê·¸ì•„ì›ƒ ë²„íŠ¼ëˆ„ë¥¼ì‹œ ì‚¬ì¸ì—…ì•¡í‹°ë¹„í‹°ë¡œ
+                    FirebaseAuth.getInstance().signOut();    // ë¡œê·¸ì•„ì›ƒ ê¸°ëŠ¥
+                    startToast("ë¡œê·¸ì•„ì›ƒ ë˜ì—ˆìŠµë‹ˆë‹¤.");
                     startLoginActivity();
                     break;
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void startToast(String msg)    // Åä½ºÆ® »ı¼ºÇÔ¼ö
+    private void startToast(String msg)    // í† ìŠ¤íŠ¸ ìƒì„±í•¨ìˆ˜
     {
         Toast.makeText(this, msg,
                 Toast.LENGTH_SHORT).show();
