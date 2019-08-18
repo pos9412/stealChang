@@ -4,13 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CarinfoActivity">
+    tools:context=".CarinfoActivity"
+    android:orientation="vertical"
+    android:padding="10dp"
+    >
 
-    <Button
-        android:id="@+id/Gologin"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/aaa"
+        android:layout_marginTop="80dp"
+        >
+    </ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="차량정보"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="398dp" />
+        android:text="기아 레이"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="연식 : 2018 년식"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="제조사 : KIA"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="출시가 1,220~1,670 만원"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="연비 : 10.5km/ℓ~13km/ℓ"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        android:layout_marginBottom="30dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:padding="10dp"
+
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="VR 시승"
+            android:background="@color/colorBlue"
+            android:layout_marginRight="10dp"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="내 차고에 저장"
+            android:background="@color/colorBlue"
+            android:layout_marginLeft="10dp"
+            />
+
+
+    </LinearLayout>
+
+
+
 </LinearLayout>
