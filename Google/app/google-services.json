@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "175259619837",
+    "firebase_url": "https://khac-bcee2.firebaseio.com",
+    "project_id": "khac-bcee2",
+    "storage_bucket": "khac-bcee2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175259619837:android:0c4d8c68340e98ca",
+        "android_client_info": {
+          "package_name": "com.example.google"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175259619837-52a1jmq3ajagpb5svig32mrhlq8arnfj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.google",
+            "certificate_hash": "43801bda8e96d6ccb2268fff1956f9b563344335"
+          }
+        },
+        {
+          "client_id": "175259619837-uoukh62r5r3nmdb09aco5cms6nlje1bc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_YU-dmyIaYrBkrwzDD4IlhXbd0ZIKk8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175259619837-09018ftjmrmq7jtbbe877ervkdf396cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
